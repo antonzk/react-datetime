@@ -59,7 +59,7 @@ export default class Datetime extends React.Component {
 		onCalendarClose: nofn,
 		onChange: nofn,
 		onNavigate: nofn,
-		onBeforeNavigate: function(next) { return next; }, 
+		onBeforeNavigate: function(next) { return next; },
 		onNavigateBack: nofn,
 		onNavigateForward: nofn,
 		dateFormat: true,
@@ -110,7 +110,7 @@ export default class Datetime extends React.Component {
 			onClick: this._onInputClick
 		};
 
-		if ( this.props.renderInput ) {   
+		if ( this.props.renderInput ) {
 			return (
 				<div>
 					{ this.props.renderInput( finalInputProps, this._openCalendar, this._closeCalendar ) }
@@ -149,18 +149,18 @@ export default class Datetime extends React.Component {
 				// { viewDate, selectedDate, renderYear, isValidDate, navigate, showView, updateDate }
 				viewProps.renderYear = props.renderYear;
 				return <YearsView {...viewProps } />;
-			
+
 			case viewModes.MONTHS:
 				// { viewDate, selectedDate, renderMonth, isValidDate, navigate, showView, updateDate }
 				viewProps.renderMonth = props.renderMonth;
 				return <MonthsView {...viewProps} />;
-			
+
 			case viewModes.DAYS:
-				// { viewDate, selectedDate, renderDay, isValidDate, navigate, showView, updateDate, timeFormat 
+				// { viewDate, selectedDate, renderDay, isValidDate, navigate, showView, updateDate, timeFormat
 				viewProps.renderDay = props.renderDay;
 				viewProps.timeFormat = this.getFormat('time');
 				return <DaysView {...viewProps} />;
-			
+
 			default:
 				// { viewDate, selectedDate, timeFormat, dateFormat, timeConstraints, setTime, showView }
 				viewProps.dateFormat = this.getFormat('date');
@@ -186,7 +186,7 @@ export default class Datetime extends React.Component {
 			inputValue: this.getInitialInputValue( selectedDate )
 		};
 	}
-	
+
 	getInitialViewDate( selectedDate ) {
 		const propDate = this.props.initialViewDate;
 		let viewDate;
@@ -251,7 +251,7 @@ export default class Datetime extends React.Component {
 
 		return cn;
 	}
-	
+
 	isOpen() {
 		return !this.props.input || (this.props.open === undefined ? this.state.open : this.props.open);
 	}
@@ -305,7 +305,7 @@ export default class Datetime extends React.Component {
 		else if ( type === 'time' ) {
 			return this.getTimeFormat();
 		}
-		
+
 		let dateFormat = this.getDateFormat();
 		let timeFormat = this.getTimeFormat();
 		return dateFormat && timeFormat ? dateFormat + ' ' + timeFormat : (dateFormat || timeFormat );
@@ -347,6 +347,7 @@ export default class Datetime extends React.Component {
 		if ( currentView === 'days' ) {
 			viewDate.month( parseInt( e.target.getAttribute('data-month'), 10 ) );
 			viewDate.year( parseInt( e.target.getAttribute('data-year'), 10 ) );
+			viewDate.set('date', parseInt( e.target.getAttribute('data-value'), 10 ));
 		}
 
 		let update = {viewDate: viewDate};
@@ -369,7 +370,7 @@ export default class Datetime extends React.Component {
 
 	_viewNavigate = ( modifier, unit ) => {
 		let viewDate = this.state.viewDate.clone();
-		
+
 		// Subtracting is just adding negative time
 		viewDate.add( modifier, unit );
 
@@ -382,10 +383,10 @@ export default class Datetime extends React.Component {
 
 		this.setState({viewDate});
 	}
-	
+
 	_setTime = ( type, value ) => {
 		let date = (this.getSelectedDate() || this.state.viewDate).clone();
-		
+
 		date[ type ]( value );
 
 		if ( !this.props.value ) {
@@ -492,7 +493,7 @@ export default class Datetime extends React.Component {
 		if ( selectedDate && selectedDate.isValid() ) {
 			update.inputValue = selectedDate.format( this.getFormat('datetime') );
 		}
-		
+
 		this.setState( update );
 	}
 
@@ -506,16 +507,16 @@ export default class Datetime extends React.Component {
 		const props = this.props;
 		if ( props.inputProps.value )
 			return props.inputProps.value;
-		
+
 		if ( selectedDate && selectedDate.isValid() )
 			return selectedDate.format( this.getFormat('datetime') );
-		
+
 		if ( props.value && typeof props.value === 'string' )
 			return props.value;
-		
+
 		if ( props.initialValue && typeof props.initialValue === 'string' )
 			return props.initialValue;
-		
+
 		return '';
 	}
 
@@ -536,7 +537,7 @@ export default class Datetime extends React.Component {
 		};
 
 		if ( !date ) return logError();
-		
+
 		let viewDate;
 		if ( typeof date === 'string' ) {
 			viewDate = this.localMoment(date, this.getFormat('datetime') );
@@ -551,7 +552,7 @@ export default class Datetime extends React.Component {
 
 	/**
 	 * Set the view currently shown by the calendar. View modes shipped with react-datetime are 'years', 'months', 'days' and 'time'.
-	 * @param TYPES.string mode 
+	 * @param TYPES.string mode
 	 */
 	navigate( mode ) {
 		this._showView( mode );
