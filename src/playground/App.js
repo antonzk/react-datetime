@@ -7,7 +7,7 @@ import Datetime from '../DateTime';
 // import 'moment/locale/tzm-latn';
 // moment.locale('tzm-latn');
 
-class App extends React.Component { 
+class App extends React.Component {
 	state = {
 		date: new Date()
 	}
@@ -15,7 +15,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Datetime />
+				<Datetime
+				/>
 			</div>
 		);
 	}

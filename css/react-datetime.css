@@ -20,7 +20,7 @@
   display: block;
 }
 
-.rdtOverlay .rdtOpen .rdtPicker {
+.rdtOverlay .rdtPicker {
   display: block;
   position: fixed !important;
   top: unset !important;
