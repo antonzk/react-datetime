@@ -19,6 +19,14 @@
 .rdtOpen .rdtPicker {
   display: block;
 }
+
+.rdtOverlay .rdtOpen .rdtPicker {
+  display: block;
+  position: fixed !important;
+  top: unset !important;
+}
+
+
 .rdtStatic .rdtPicker {
   box-shadow: none;
   position: static;
